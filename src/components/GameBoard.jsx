@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-const GameBoard = ({ onSelectCell, turns }) => {
-  let gameBoard = initialGameBoard;
-  turns.forEach((turn) => {
-    const { row, col } = turn.square;
-    gameBoard[row][col] = turn.player;
-  });
+const GameBoard = ({ onSelectCell, gameBoard }) => {
   //   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   //   const handleCellClick = (rowIndex, colIndex) => {
@@ -33,7 +22,10 @@ const GameBoard = ({ onSelectCell, turns }) => {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex} className="cell">
-                <button onClick={() => onSelectCell(rowIndex, colIndex)}>
+                <button
+                  onClick={() => onSelectCell(rowIndex, colIndex)}
+                  disabled={playerSymbol !== null}
+                >
                   {playerSymbol}
                 </button>
               </li>

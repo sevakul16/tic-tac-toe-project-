@@ -1,6 +1,6 @@
 import Rect, { useState } from "react";
 
-const Player = ({ initialName, symbol, isActive }) => {
+const Player = ({ initialName, symbol, isActive, onNameChange }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(initialName);
 
@@ -14,6 +14,7 @@ const Player = ({ initialName, symbol, isActive }) => {
             value={playerName}
             onChange={(e) => {
               setPlayerName(e.target.value);
+              if (isEditing) onNameChange(symbol, e.target.value);
             }}
           />
         ) : (
